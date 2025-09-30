@@ -8,7 +8,6 @@ const PORT = process.env.PORT || 3000;
 
 // Dùng biến môi trường MONGO_URI, nếu không có thì fallback URI để FCC test
 const MONGO_URI = process.env.MONGO_URI;
-console.log('Mongo URI:', process.env.MONGO_URI ? '✅ Loaded' : '❌ Missing');
 // Kết nối MongoDB
 mongoose
   .connect(MONGO_URI, {
@@ -51,8 +50,8 @@ const createAndSavePerson = (done) => {
 
 const createManyPeople = (arrayOfPeople, done) => {
   Person.create(arrayOfPeople, (err, people) => {
-    if (err) return done;
-    return done(null, people);
+    if (err) return done(err);
+    done(null, people);
   });
 };
 
