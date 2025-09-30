@@ -1,14 +1,25 @@
 require('dotenv').config();
 // require('dotenv').config({ path: './mongo.env' });
+const express = require('express');
 const mongoose = require('mongoose');
 
+const app = express();
+const PORT = process.env.PORT || 3000;
 mongoose
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log('✅ MongoDB connected'))
+  .then(() => console.log('✅ Connected to MongoDB Atlas'))
   .catch((err) => console.error('❌ Connection error:', err));
+
+app.get('/', (req, res) => {
+  res.send('Hello World! MongoDB connected.');
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
 
 let Person;
 
