@@ -28,11 +28,55 @@ mongoose
 //   console.log(`Server running on port ${PORT}`);
 // });
 
-let Person;
+const personSchema = new mongoose.Schema({
+  name: { type: String, required: true }, // name bắt buộc
+  age: Number, // age kiểu Number
+  favoriteFoods: [String], // favoriteFoods là mảng String
+});
 
-const createAndSavePerson = (done) => {
-  done(null /*, data*/);
+// 2. Tạo Model từ schema
+let Person = mongoose.model('Person', personSchema);
+
+// let Person;
+
+// const createAndSavePerson = (done) => {
+//   const john = new Person({
+//     name: 'John Doe',
+//     age: 30,
+//     favoriteFoods: ['pizza', 'pasta'],
+//   });
+
+//   john.save((err, data) => {
+//     if (err) return done(err);
+//     done(null, data);
+//   });
+//   // done(null /*, data*/);
+// };
+
+const createAndSavePerson = async () => {
+  try {
+    const john = new Person({
+      name: 'John Doe',
+      age: 30,
+      favoriteFoods: ['pizza', 'pasta'],
+    });
+
+    const savedPerson = await john.save();
+    console.log('Saved person:', savedPerson);
+
+    // 4. Lấy tất cả document trong collection 'people'
+    const allPeople = await Person.find({});
+    console.log('All people in DB:', allPeople);
+  } catch (err) {
+    console.error(err);
+  } finally {
+    // Ngắt kết nối
+    mongoose.connection.close();
+  }
 };
+
+// // Gọi hàm test
+// createAndSavePerson();
 
 const createManyPeople = (arrayOfPeople, done) => {
   done(null /*, data*/);
