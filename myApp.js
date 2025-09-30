@@ -1,9 +1,9 @@
 require('dotenv').config();
 // require('dotenv').config({ path: './mongo.env' });
-const express = require('express');
+// const express = require('express');
 const mongoose = require('mongoose');
 
-const app = express();
+// const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Dùng biến môi trường MONGO_URI, nếu không có thì fallback URI để FCC test
@@ -26,9 +26,9 @@ mongoose
 // });
 
 // Start server
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`Server running on port ${PORT}`);
+// });
 
 let Person;
 
