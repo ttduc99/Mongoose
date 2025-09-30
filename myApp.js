@@ -53,26 +53,19 @@ let Person = mongoose.model('Person', personSchema);
 //   // done(null /*, data*/);
 // };
 
-const createAndSavePerson = async () => {
-  try {
-    const john = new Person({
-      name: 'John Doe',
-      age: 30,
-      favoriteFoods: ['pizza', 'pasta'],
-    });
+const createAndSavePerson = (done) => {
+  // Tạo một document instance từ model Person
+  const person = new Person({
+    name: 'Jane Doe', // kiểu String, bắt buộc
+    age: 25, // kiểu Number
+    favoriteFoods: ['sushi', 'ramen'], // mảng String
+  });
 
-    const savedPerson = await john.save();
-    console.log('Saved person:', savedPerson);
-
-    // 4. Lấy tất cả document trong collection 'people'
-    const allPeople = await Person.find({});
-    console.log('All people in DB:', allPeople);
-  } catch (err) {
-    console.error(err);
-  } finally {
-    // Ngắt kết nối
-    mongoose.connection.close();
-  }
+  // Lưu document vào database
+  person.save(function (err, data) {
+    if (err) return done(err); // nếu lỗi thì trả về err
+    done(null, data); // nếu thành công, trả về document đã lưu
+  });
 };
 
 // // Gọi hàm test
