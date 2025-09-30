@@ -54,28 +54,17 @@ let Person = mongoose.model('Person', personSchema);
 // };
 
 const createAndSavePerson = (done) => {
-  // Tạo một document instance từ model Person
   const person = new Person({
-    name: 'Jane Doe', // kiểu String, bắt buộc
-    age: 25, // kiểu Number
-    favoriteFoods: ['sushi', 'ramen'], // mảng String
+    name: 'John Doe', // String
+    age: 25, // Number
+    favoriteFoods: ['pizza'], // Array of Strings
   });
 
-  // Lưu document vào database
-  person.save(function (err, data) {
-    if (err) return done(err); // nếu lỗi thì trả về err
-    done(null, data); // nếu thành công, trả về document đã lưu
+  person.save((err, data) => {
+    if (err) return done(err);
+    done(null, data); // trả về document qua callback
   });
 };
-
-// // Gọi hàm test
-createAndSavePerson((err, data) => {
-  if (err) console.error(err);
-  else console.log('Saved person:', data);
-
-  // Ngắt kết nối sau khi xong
-  mongoose.connection.close();
-});
 
 const createManyPeople = (arrayOfPeople, done) => {
   done(null /*, data*/);
