@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 
 // Dùng biến môi trường MONGO_URI, nếu không có thì fallback URI để FCC test
 const MONGO_URI = process.env.MONGO_URI;
-
+console.log('Mongo URI:', process.env.MONGO_URI ? '✅ Loaded' : '❌ Missing');
 // Kết nối MongoDB
 mongoose
   .connect(MONGO_URI, {
@@ -34,34 +34,17 @@ const personSchema = new mongoose.Schema({
   favoriteFoods: [String], // favoriteFoods là mảng String
 });
 
-// 2. Tạo Model từ schema
-// let Person = mongoose.model('Person', personSchema);
+let Person = mongoose.model('Person', personSchema);
 
-// const createAndSavePerson = (done) => {
-//   const person = new Person({
-//     name: 'Ductt',
-//     age: 26,
-//     favoriteFoods: ['sushi', 'ramen'],
-//   });
-
-//   person.save(function (err, data) {
-//     if (err) return done(err);
-//     done(null, data);
-//   });
-// };
-
-/** 3) Create and Save a Person */
-var Person = mongoose.model('Person', personSchema);
-
-var createAndSavePerson = function (done) {
-  var janeFonda = new Person({
-    name: 'ductt21',
-    age: 84,
-    favoriteFoods: ['eggs', 'fish', 'salmon'],
+const createAndSavePerson = (done) => {
+  const person = new Person({
+    name: 'Ductt',
+    age: 26,
+    favoriteFoods: ['sushi', 'ramen'],
   });
 
-  janeFonda.save(function (err, data) {
-    if (err) return console.error(err);
+  person.save(function (err, data) {
+    if (err) return done(err);
     done(null, data);
   });
 };
