@@ -35,17 +35,33 @@ const personSchema = new mongoose.Schema({
 });
 
 // 2. Tạo Model từ schema
-let Person = mongoose.model('Person', personSchema);
+// let Person = mongoose.model('Person', personSchema);
 
-const createAndSavePerson = (done) => {
-  const person = new Person({
-    name: 'Ductt',
-    age: 26,
-    favoriteFoods: ['sushi', 'ramen'],
+// const createAndSavePerson = (done) => {
+//   const person = new Person({
+//     name: 'Ductt',
+//     age: 26,
+//     favoriteFoods: ['sushi', 'ramen'],
+//   });
+
+//   person.save(function (err, data) {
+//     if (err) return done(err);
+//     done(null, data);
+//   });
+// };
+
+/** 3) Create and Save a Person */
+var Person = mongoose.model('Person', personSchema);
+
+var createAndSavePerson = function (done) {
+  var janeFonda = new Person({
+    name: 'ductt21',
+    age: 84,
+    favoriteFoods: ['eggs', 'fish', 'salmon'],
   });
 
-  person.save(function (err, data) {
-    if (err) return done(err);
+  janeFonda.save(function (err, data) {
+    if (err) return console.error(err);
     done(null, data);
   });
 };
