@@ -69,7 +69,13 @@ const createAndSavePerson = (done) => {
 };
 
 // // Gọi hàm test
-// createAndSavePerson();
+createAndSavePerson((err, data) => {
+  if (err) console.error(err);
+  else console.log('Saved person:', data);
+
+  // Ngắt kết nối sau khi xong
+  mongoose.connection.close();
+});
 
 const createManyPeople = (arrayOfPeople, done) => {
   done(null /*, data*/);
