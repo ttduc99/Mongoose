@@ -20,10 +20,10 @@ mongoose
   .then(() => console.log('✅ Connected to MongoDB Atlas'))
   .catch((err) => console.error('❌ Connection error:', err));
 
-// Test route
-app.get('/', (req, res) => {
-  res.send('Hello World! MongoDB connected.');
-});
+// // Test route
+// app.get('/', (req, res) => {
+//   res.send('Hello World! MongoDB connected.');
+// });
 
 // Start server
 app.listen(PORT, () => {
