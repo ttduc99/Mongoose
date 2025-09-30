@@ -37,32 +37,16 @@ const personSchema = new mongoose.Schema({
 // 2. Tạo Model từ schema
 let Person = mongoose.model('Person', personSchema);
 
-// let Person;
-
-// const createAndSavePerson = (done) => {
-//   const john = new Person({
-//     name: 'John Doe',
-//     age: 30,
-//     favoriteFoods: ['pizza', 'pasta'],
-//   });
-
-//   john.save((err, data) => {
-//     if (err) return done(err);
-//     done(null, data);
-//   });
-//   // done(null /*, data*/);
-// };
-
 const createAndSavePerson = (done) => {
   const person = new Person({
-    name: 'John Doe', // String
-    age: 25, // Number
-    favoriteFoods: ['pizza'], // Array of Strings
+    name: 'Ductt',
+    age: 26,
+    favoriteFoods: ['sushi', 'ramen'],
   });
 
-  person.save((err, data) => {
+  person.save(function (err, data) {
     if (err) return done(err);
-    done(null, data); // trả về document qua callback
+    done(null, data);
   });
 };
 
